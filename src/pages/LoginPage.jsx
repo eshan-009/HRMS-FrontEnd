@@ -15,7 +15,7 @@ const LoginPage = () => {
   useEffect(()=>{
     if(isLoggedIn)
     {
-      navigate("/")
+      navigate("/home")
     }
   },[])
   return(
