@@ -1,8 +1,0 @@
-{
-    "routes": [
-      {
-        "src": "/old-route",
-        "dest": "/new-route"
-      }
-    ]
-  }

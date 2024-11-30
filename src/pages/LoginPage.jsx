@@ -20,6 +20,8 @@ const LoginPage = () => {
   },[])
   return(
     <>
+    <p>Email : Eshan@hmail.com</p>
+    <p>password : 99999</p>
      {/* <div className='flex  mt-20 justify-center gap-4'>
          <div>
       <img className="h-32 w-32 p-2" src={Avisoft} alt="Avi Logo" />
