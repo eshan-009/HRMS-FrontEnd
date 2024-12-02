@@ -14,15 +14,15 @@ const LoginForm = () => {
   } = useForm();
   return (
 
-    <div className="flex flex-col"> 
-     <div className='flex  mt-20 justify-center gap-4'>
+    <div className="flex flex-col  items-center w-full max-w-[30rem]"> 
+     <div className='flex  mt-6 justify-center gap-4'>
          <div>
       <img className="h-32 w-32 p-2" src={Avisoft} alt="Avi Logo" />
        <h3 className='font-serif font-bold text-2xl'> Sign-In Portal</h3>
         </div>
        </div>
 
-<div className="bg-gray-300 rounded-lg border w-1/2 min-w-60 " >
+<div className="bg-gray-300 rounded-lg border  w-full  min-w-60 " >
           <div>
             <h1 className="text-2xl font-bold font-serif text-center pt-5 text-gray-800 mb-4">
               Sign in to your Account
@@ -53,8 +53,8 @@ const LoginForm = () => {
               {errors.password && <div>Please enetr your password</div>}
             </div>
 
-            <div>
-              <a href="#" className="text-blue-600 text-sm">
+            <div className="mt-2">
+              <a href="#" className="text-blue-600 text-sm ">
                 Forgot Password?  
               </a>
             </div>
@@ -63,7 +63,7 @@ const LoginForm = () => {
             type="submit"
             value = {`${ isSubmitting? "Submitting" : "Submit" }`}
             disabled={isSubmitting}
-            className="bg-blue-600 w-full text-white p-2 rounded font-serif" >
+            className="bg-blue-600 w-full text-white p-2 rounded font-serif mt-3" >
                
             </input>
           </form>

@@ -20,15 +20,17 @@ const LoginPage = () => {
   },[])
   return(
     <>
-    <p>Email : dummy@dummy.com</p>
-    <p>password : dummy$9A</p>
+<div className='flex items-center flex-col w-full  text-red-600'>
+<p><b>Email</b> : dummy@dummy.com</p>
+<p><b>Password</b> : dummy$9A</p>
+</div>
      {/* <div className='flex  mt-20 justify-center gap-4'>
          <div>
       <img className="h-32 w-32 p-2" src={Avisoft} alt="Avi Logo" />
        <h3 className='font-serif font-bold text-2xl'> Sign-In Portal</h3>
         </div>
        </div> */}
-     <div className='flex justify-center'>
+     <div className='flex justify-center '>
        { !isLoggedIn && <LoginForm/> }
      </div>
     </>
