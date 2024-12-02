@@ -609,9 +609,11 @@ const CreateForm = ({
                 )}
             </div>
           </div>
+                <div>
                 <SubmitButton
                 buttonText={"Submit"}
                 />
+                </div>
         </form>
       )}
 
