@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { addRole, editRole } from "../../../services/operations/Roles";
 import { AiOutlineCheck } from "react-icons/ai";
-import SubmitButton from "../../../components/common/SubmitButton";
+import SubmitButton from "../../../components/common/buttons/SubmitButton";
 const CreateRole = () => {
   const Theme = useSelector((state)=>state.Theme.theme)
   const location = useLocation();

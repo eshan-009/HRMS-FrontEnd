@@ -1,3 +1,4 @@
+import toast from "react-hot-toast"
 import { setEmployees, setFilteredEmployees, setIsLastEmp, setSearchList } from "../../redux/slices/asideSlice"
 import { setName, setProfilePicture, setRole } from "../../redux/slices/userSlice"
 import { apiConnector } from "../apiConnector"
@@ -147,7 +148,7 @@ export const getEmployeesByPID = (pDetailId)=>{
 export const addEmployee = (email,password,organizationId,roleId,setUserId,setFormState)=>{
     return async(dispatch)=>{
         try{
-            
+            const toastId = toast.loading("Creating new Employee")
             const newUrl = `${ADD_EMPLOYEE}/${organizationId}/${roleId}`
             const body = {
                 email : email,
@@ -161,14 +162,21 @@ export const addEmployee = (email,password,organizationId,roleId,setUserId,setFo
                 "Authorization" : `Bearer ${token}`
             })
 
-            console.log(response)
+            toast.dismiss(toastId)
+            
             if(response.data.success)
             {
                 setUserId(response.data.data)
                 setFormState(2)
+                toast.success(`${response.data.message}`)
+            }
+            else
+            {
+                toast.error(`${response.data.message}`)
             }
         } catch (err){
-
+            console.log(err)
+            toast.error("Something went wrong")
         }
     }
 }
@@ -176,11 +184,12 @@ export const addEmployee = (email,password,organizationId,roleId,setUserId,setFo
 export const addEmployeePersonalDetails = (file,firstName,lastName,employeeCode,departmentId,skills,designation,customAttributes,userId,setFormState)=>{
     return async(dispatch)=>{
         try{
+            const toastId = toast.loading("Creating Employee Profile")
             const newUrl = `${ADD_PERSONAL_DETAILS}/${userId}`
-            console.log(file,firstName,lastName,employeeCode,departmentId,customAttributes,userId,newUrl)
+            // console.log(file,firstName,lastName,employeeCode,departmentId,customAttributes,userId,newUrl)
             // data.file[0],data.firstName,data.lastName,data.employeeCode,data.departmentId,userId,setFormState
             // data.file[0],datfirstName,data.lastName,data.employeeCode,data.departmentId,customAttributes,userId,setFormState
-            console.log("HERE1")
+            
             
             const formData = new FormData()
             formData.append("profilepicture",file)
@@ -201,16 +210,23 @@ export const addEmployeePersonalDetails = (file,firstName,lastName,employeeCode,
     
                 "Authorization" : `Bearer ${token}`
             })
-            console.log("HERE4")
-            console.log(response)
+        
 
+           
+            toast.dismiss(toastId)
+            
             if(response.data.success)
             {
-             
                 setFormState(3)
+               
+                toast.success(`${response.data.message}`)
+            }
+            else
+            {
+                toast.error(`${response.data.message}`)
             }
         } catch (err){
-
+            console.log(err)
         }
     }
 }
@@ -218,8 +234,8 @@ export const addEmployeePersonalDetails = (file,firstName,lastName,employeeCode,
 export const addEmployeeAdditionalDetails = (contact,relationShip,addressType,propertyNumber,city,zipCode,state,country,bankName,accountNumber,ifscCode,bankBranch,userId,setFormState)=>{
     return async(dispatch)=>{
         try{
-            
-            const newUrl = `${ADD_ADDITIONAL_DETAILS}/${userId}`
+            const toastId = contact ? toast.loading("Adding Emergency Contact") : addressType ? toast.loading("Adding Address Details") : toast.loading("Adding Bank Details")
+            const newUrl = `${ADD_ADDITIONAL_DETAILS}/${userId}` 
             const body = {
                 contact,
                 relationShip,
@@ -234,7 +250,7 @@ export const addEmployeeAdditionalDetails = (contact,relationShip,addressType,pr
                 ifscCode,
                 bankBranch,
             }
-            console.log(body,newUrl)
+            // console.log(body,newUrl)
 
             const token = localStorage.getItem("token")
             const response = await apiConnector("POST",newUrl,body,{
@@ -242,11 +258,18 @@ export const addEmployeeAdditionalDetails = (contact,relationShip,addressType,pr
                 "Authorization" : `Bearer ${token}`
             })
 
-            console.log(response)
+           
+            toast.dismiss(toastId)
+            
             if(response.data.success)
             {
-                
                 setFormState(1)
+           
+                toast.success(`${response.data.message}`)
+            }
+            else
+            {
+                toast.error(`${response.data.message}`)
             }
         } catch (err){
 
@@ -257,8 +280,9 @@ export const addEmployeeAdditionalDetails = (contact,relationShip,addressType,pr
 export const editEmployeePersonalDetails = (file,firstName,lastName,employeeCode,departmentId,skills,designation,customAttributes,userId,setFormState)=>{
     return async(dispatch)=>{
         try{
+            const toastId = toast.loading("Updating Employee Profile")
             const newUrl = `${EDIT_PERSONAL_DETAILS}/${userId}`
-            console.log(file,firstName,lastName,employeeCode,departmentId,customAttributes,userId,newUrl)
+            // console.log(file,firstName,lastName,employeeCode,departmentId,customAttributes,userId,newUrl)
             // data.file[0],data.firstName,data.lastName,data.employeeCode,data.departmentId,userId,setFormState
             // data.file[0],datfirstName,data.lastName,data.employeeCode,data.departmentId,customAttributes,userId,setFormState
             console.log("HERE1")
@@ -282,14 +306,19 @@ export const editEmployeePersonalDetails = (file,firstName,lastName,employeeCode
     
                 "Authorization" : `Bearer ${token}`
             })
-            console.log("HERE4")
-            console.log(response)
+           
+            toast.dismiss(toastId)
 
             if(response.data.success)
-            {
-             
-                setFormState(3)
-            }
+                {
+                    setFormState(3)
+                 
+                    toast.success(`${response.data.message}`)
+                }
+                else
+                {
+                    toast.error(`${response.data.message}`)
+                }
         } catch (err){
 
         }
@@ -323,7 +352,8 @@ export const deleteEmployee = (userId)=>{
 export const editEmployeeAdditionalDetails = (userId,contact,relationShip,addressType,propertyNumber,city,zipCode,state,country,bankName,accountNumber,ifscCode,bankBranch)=>{
     return async(dispatch)=>{
         try{
-            
+            const toastId = contact ? toast.loading("Updating Emergency Contact") : addressType ? toast.loading("Updating Address Details") : toast.loading("Updating Bank Details")
+
             const newUrl = `${EDIT_ADDITIONAL_DETAILS}/${userId}`
             const body = {
                 contact,
@@ -347,12 +377,18 @@ export const editEmployeeAdditionalDetails = (userId,contact,relationShip,addres
                 "Authorization" : `Bearer ${token}`
             })
 
-            console.log(response)
-            // if(response.data.success)
-            // {
-                
+            toast.dismiss(toastId)
+            
+            if(response.data.success)
+            {
+               
               
-            // }
+                toast.success(`${response.data.message}`)
+            }
+            else
+            {
+                toast.error(`${response.data.message}`)
+            }
         } catch (err){
 
         }

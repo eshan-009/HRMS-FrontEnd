@@ -8,7 +8,11 @@ import { useNavigate } from 'react-router-dom';
 import { getEmployeeById } from '../../../services/operations/Employee';
 import Modal from '../../../components/common/Modal';
 import { IoAddCircleOutline } from "react-icons/io5";
+import AssignmentButton from '../../../components/common/buttons/AssignmentButton';
+import Headings from '../../../components/common/Headings';
+import NavigateToForm from '../../../components/common/buttons/NavigateToForm';
 const DepartmentList = () => {
+  const refreshState = useSelector((state)=>state.Refresh.count)
   const Theme = useSelector((state)=>state.Theme.theme)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -21,7 +25,7 @@ const DepartmentList = () => {
   const [isSuborg,setIsSuborg] = useState(false)
   const isLastPage = useSelector((state)=>state.Aside.isLastDep)
 const [page,setPage] = useState(1)
-
+console.log(refreshState)
   useEffect(()=>{
   
       dispatch(getOrganizations("All"))
@@ -29,13 +33,19 @@ const [page,setPage] = useState(1)
       dispatch(getUnassignedDepartments())
 
   },[])
+
+  useEffect(()=>{
+    console.log("Refresh")
+    organizationId !== "unAssigned" ? dispatch(getDepartmentsByOrganization(organizationId)) :   dispatch(getUnassignedDepartments())
+
+  },[refreshState])
   // useEffect(()=>{
   //     dispatch(getSubOrganizationsByOrganizations(organizationId))
   // },[organizationId])
   console.log("organizationId=====>>>>>.",organizationId)
   function deleteHandler(id){
     console.log(id)
-    dispatch(deleteDepartment(id))
+    dispatch(deleteDepartment(id,navigate))
   
       }
   async function editHandler(data){
@@ -63,18 +73,25 @@ const [page,setPage] = useState(1)
         dispatch(removeBranchFromDepartment(departmentId,branchId))
       }
 
+      function organizationAssignHandler(item){
+        setIsSuborg(false)
+        setDepartmentId(item._id)
+        setModal(true)
+      }
 
+      function subOrganizationAssignHandler(item){
+        setIsSuborg(true)
+        setDepartmentId(item._id)
+        
+        setModal(true)
+      }
 
 return (
   <div className={`p-5 rounded ${Theme=="Dark" ? "bg-slate-800 text-white" : "bg-slate-100"}`}>
-    <div className='flex justify-between text-xl font-bold w-full'>
-           <p>{location.pathname.split("/").at(-1).replaceAll("-"," ")}</p>
-           <p>Home / <span className='text-yellow-600'>{location.pathname.split("/").at(-1).replaceAll("-"," ")}</span></p>
-           </div>
+    <Headings title={location.pathname.split("/").at(-1).replaceAll("-"," ")}/>
+    <NavigateToForm     onClick={()=>navigate("/home/Create-Department")} buttonText={"Add Department"}/>
 
-      <button 
-      onClick={()=>navigate("/home/Create-Department")}
-      className="p-2 bg-red-500 mt-7 rounded text-white flex items-center gap-3"><IoAddCircleOutline/>Add Department</button>
+
       <div >
           <select
           
@@ -122,36 +139,19 @@ return (
      
         <td>{item?.manager?.personalDetails?.firstName + " " + item?.manager?.personalDetails?.lastName}</td>
         <td>{item.description}</td>
-        <td>{item.Organization ? <button onClick={(e)=>{
-          e.preventDefault()
-         
-          removeOrganization(item._id,item.Organization)
-        }} className='bg-yellow-300 p-2'>UnAssign</button>:<button onClick={(e)=>{
-          console.log(item)
-          setIsSuborg(false)
-          setDepartmentId(item._id)
-          setModal(true)
-        }} className='bg-yellow-300 p-2'>Assign</button>}</td>
+        <td>{item.Organization ? <AssignmentButton onClick={()=>removeOrganization(item._id,item.Organization)} buttonText={"UnAssign"}/>:<AssignmentButton onClick={()=>organizationAssignHandler(item)} buttonText={"Assign"}/>}</td>
 
-        <td>{item.branch ? <button  onClick={(e)=>{
-          e.preventDefault()
-          removeBranch(item._id,item.branch)
-        }}  className='bg-yellow-300 p-2'>UnAssign</button>:<button  onClick={(e)=>{
-          setIsSuborg(true)
-          setDepartmentId(item._id)
-          
-          setModal(true)
-        }} className='bg-yellow-300 p-2'>Assign</button>}</td>
+        <td>{item.branch ? <AssignmentButton onClick={()=>removeBranch(item._id,item.branch)} buttonText={"UnAssign"}/>:<AssignmentButton onClick={()=>subOrganizationAssignHandler(item)} buttonText={"Assign"}  />}</td>
 
         <td >
         <div className='flex items-center gap-3'>
         <FiEdit 
         className='text-blue-500 '
-        onClick={()=>editHandler(item)}
+        onClick={()=>editHandler(item,navigate)}
         />
         <MdDelete
         className=' text-red-500'
-        onClick={()=>deleteHandler(item._id)}
+        onClick={()=>deleteHandler(item._id,navigate)}
         />
         </div>
         </td>

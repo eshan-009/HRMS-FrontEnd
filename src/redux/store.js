@@ -4,6 +4,7 @@ import userReducer from "./slices/userSlice";
 import asideReducer from "./slices/asideSlice";
 import attributeReducer from "./slices/attributeSlice";
 import themeReducer from "./slices/themeSlice";
+import refresh from "./slices/refreshSlice";
 
 export const store = configureStore({
 reducer :{
@@ -11,6 +12,7 @@ reducer :{
     User : userReducer,
     Aside : asideReducer,
     Attribute : attributeReducer,
-    Theme : themeReducer
+    Theme : themeReducer,
+    Refresh : refresh
 }
 })

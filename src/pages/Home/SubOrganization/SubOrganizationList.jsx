@@ -6,6 +6,9 @@ import { MdDelete } from "react-icons/md";
 import { assignOrganizationToSubOrganization, deleteSubOrganization, removeOrganizationFromSubOrganization } from '../../../services/operations/SubOrganization';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../../../components/common/Modal';
+import AssignmentButton from '../../../components/common/buttons/AssignmentButton';
+import Headings from '../../../components/common/Headings';
+import NavigateToForm from '../../../components/common/buttons/NavigateToForm';
 const SubOrganizationList = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -46,17 +49,19 @@ function assignOrganization(branchId,organizationId){
 function unAssignOrganization(branchId,organizationId){
   dispatch(removeOrganizationFromSubOrganization(branchId,organizationId))
 }
+function assignHandler(item){
+  setBranchId(item._id)
+setModal(true)
+}
 console.log(isLastPage)
   return (
     <div className={`p-5  rounded ${Theme=="Dark" ? "bg-slate-800 text-white" : "bg-slate-100"}`}>
-      <div className={`flex justify-between text-xl font-bold w-full `}>
-           <p>{location.pathname.split("/").at(-1).replaceAll("-"," ")}</p>
-           <p>Home / <span className='text-yellow-600'>{location.pathname.split("/").at(-1).replaceAll("-"," ")}</span></p>
-           </div>
+      
+      <Headings  title={location.pathname.split("/").at(-1).replaceAll("-"," ")} />
 
-      <button 
-      onClick={()=>navigate("/home/Create-Sub-Organization")}
-      className="p-2 bg-red-500 mt-7 rounded text-white ">Add Sub Organization</button>
+      <NavigateToForm  onClick={()=>navigate("/home/Create-Sub-Organization")} buttonText={"Add Sub Organization"}/>
+
+ 
       
         <div>
             <select
@@ -102,15 +107,7 @@ console.log(isLastPage)
           <td className='p-5'>{item._id}</td>
        
           <td>{item.name}</td>
-          <td>{item.Organization ? <button onClick={()=>{
-            console.log(item._id,item.Organization)
-            unAssignOrganization(item._id,item.Organization)
-          }} className='bg-yellow-300 p-2'>UnAssign</button> :<button onClick={(e)=>{
-
-            e.preventDefault()
-setBranchId(item._id)
-setModal(true)
-          }} className='bg-yellow-300 p-2'>Assign</button>}</td>
+          <td>{item.Organization ? <AssignmentButton onClick={()=>unAssignOrganization(item._id,item.Organization)}/> :<AssignmentButton onClick={()=>assignHandler(item)} buttonText={"Assign"} />}</td>
           <td >
           <div className='flex items-center gap-3'>
           <FiEdit 

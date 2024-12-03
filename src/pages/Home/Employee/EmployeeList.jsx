@@ -6,7 +6,11 @@ import { getAllDepartments } from '../../../services/operations/Department';
 import { assignDepartmentToEmployee, deleteEmployee, getAllEmployees, getEmployeesByDepartment, removeDepartmentFromEmployee } from '../../../services/operations/Employee';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../../../components/common/Modal';
+import AssignmentButton from '../../../components/common/buttons/AssignmentButton';
+import Headings from '../../../components/common/Headings';
+import NavigateToForm from '../../../components/common/buttons/NavigateToForm';
 const EmployeeList = () => {
+  const refreshState = useSelector((state)=>state.Refresh.count)
   const Theme = useSelector((state)=>state.Theme.theme)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -19,38 +23,50 @@ const EmployeeList = () => {
   const [page,setPage] = useState(1)
 
   const [departmentId,setDepartmentId]= useState("All")
+
   useEffect(()=>{
       dispatch(getAllDepartments())
       dispatch(getAllEmployees())
-      // dispatch(getSubOrganizationsByOrganizations(departmentId))
-  //    dispatch(getSubOrganizations())
+
   },[])
-  // useEffect(()=>{
-  //     dispatch(getSubOrganizationsByOrganizations(departmentId))
-  // },[departmentId])
-  console.log("departmentIIIId=====>>>>>.",departmentId )
+
+  useEffect(()=>{
+
+    departmentId!=="All" ?  dispatch(getEmployeesByDepartment(departmentId)) : dispatch(getAllEmployees())
+  },[refreshState])
+
 
   function deleteHandler(userId){
-    console.log(userId)
+    // console.log(userId)
 dispatch(deleteEmployee(userId))
   }
+
+
   function editHandler(data){
-    console.log(data)
+    // console.log(data)
     navigate("/home/Create-Employee",{state : {preFilled : data}})
   }
+
+  
   function assignDepartment(userId,departmentId){
     dispatch(assignDepartmentToEmployee(userId,departmentId))
   }
+
+  function handleUnAssign(item){
+    dispatch(removeDepartmentFromEmployee(item?._id,item?.personalDetails?.department))
+  }
+
+  function handleAssign(e,item){
+    e.preventDefault()
+    setModal(true)
+    setUserId(item?._id)
+  }
+
 return (
   <div className={`p-5 bg-slate-100 rounded ${Theme=="Dark" ? "bg-slate-800 text-white" : "bg-slate-100"}`}>
- <div className='flex justify-between font-bold w-full'>
-           <p>{location.pathname.split("/").at(-1).replaceAll("-"," ")}</p>
-           <p>Home/<span className='text-yellow-600'>{location.pathname.split("/").at(-1).replaceAll("-"," ")}</span></p>
-           </div>
+    <Headings title={location.pathname.split("/").at(-1).replaceAll("-"," ")}/>
 
-      <button 
-      onClick={()=>navigate("/home/Create-Employee")}
-      className="p-2 bg-red-500 mt-7 rounded text-white ">Add Employee</button>
+<NavigateToForm  onClick={()=>navigate("/home/Create-Employee")} buttonText={"Add Employee"}/>
       <div>
           <select 
                         className={`appearance-none w-full min-w-72 max-w-96 p-2 drop-shadow-lg border-2 rounded mb-3 mx-auto mt-9 ${Theme=="Dark" ? "bg-slate-700 border-slate-500" : "bg-slate-100"} `}
@@ -103,21 +119,18 @@ return (
         <td>{item?.personalDetails?.firstName + " "+ item?.personalDetails?.lastName} </td>
         <td>{item?.email}</td>
         <td>{item?.personalDetails?.employeeCode}</td>
-        <td>{item?.personalDetails?.department ? <button onClick={()=>dispatch(removeDepartmentFromEmployee(item?._id,item?.personalDetails?.department))} className='bg-yellow-300 p-2'>UnAssign</button>
-         : <button onClick={(e)=>{
-          e.preventDefault()
-          setModal(true)
-          setUserId(item?._id)
-         
-        }} className='bg-yellow-300 p-2'>Assign</button>}</td>
+        <td>{item?.personalDetails?.department ?     <AssignmentButton onClick={()=>handleUnAssign(item)} buttonText={"UnAssign"}/> 
+        // <button onClick={()=>dispatch(removeDepartmentFromEmployee(item?._id,item?.personalDetails?.department))} className='bg-yellow-300 p-2'>UnAssign</button>
+         : <AssignmentButton onClick={(e)=>handleAssign(e,item)} buttonText={"Assign"}/>}</td>
         <td >
         <div className='flex items-center gap-3'>
         <FiEdit 
-        className='text-blue-500'
+        className={` hover:scale-125 ${Theme=="Dark"?"text-blue-300" : "text-blue-500"}`}
         onClick={()=>editHandler(item)}
         />
+      
         <MdDelete
-        className='text-red-500'
+        className='text-red-500 hover:scale-125'
         onClick={()=>deleteHandler(item._id)}
         />
         </div>

@@ -15,8 +15,9 @@ const Tooltip = () => {
       <p 
       onClick={(e)=>{
         e.preventDefault()
-        localStorage.clear()
+        
         dispatch(setLoggedIn(false))
+        localStorage.clear()
         navigate("/login")
       }}
       className='flex gap-2 items-center'><IoLogOutOutline />Log Out</p>

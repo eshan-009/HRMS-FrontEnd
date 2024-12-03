@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteOrganization } from '../../../services/operations/Organization';
 import { useNavigate } from 'react-router-dom';
 import { IoAddCircleOutline } from "react-icons/io5";
+import Headings from '../../../components/common/Headings';
 const OrganizationList = () => {
 
 const dispatch = useDispatch()
@@ -31,10 +32,8 @@ const [page,setPage] = useState(1)
       }
   return (
     <div className={`w-full p-5 border rounded-lg ${Theme=="Dark" ? "bg-slate-800 text-white" : "bg-slate-100"}`}>
-       <div className='flex justify-between text-xl font-bold w-full'>
-           <p>{location.pathname.split("/").at(-1).replaceAll("-"," ")}</p>
-           <p>Home / <span className='text-yellow-600'>{location.pathname.split("/").at(-1).replaceAll("-"," ")}</span></p>
-           </div>
+
+      <Headings title={location.pathname.split("/").at(-1).replaceAll("-"," ")} />
 
       <button 
       onClick={()=>navigate("/home/Create-Organization")}
@@ -89,7 +88,6 @@ const [page,setPage] = useState(1)
   page >0  && dispatch(getOrganizations(page-1))
    setPage(page-1)
 
-    console.log("HHHH")
    }} 
    disabled={page==1}
 

@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import {getOrganizations} from '../../../services/operations/AsideBar'
 import {getAllRoles} from '../../../services/operations/Roles'
 import { addEmployee } from '../../../services/operations/Employee';
-import SubmitButton from '../../common/SubmitButton';
+import SubmitButton from '../../common/buttons/SubmitButton';
 
 const CreateEmployeeForm = ({setUserId,setFormState}) => {
   const Theme = useSelector((state)=>state.Theme.theme)

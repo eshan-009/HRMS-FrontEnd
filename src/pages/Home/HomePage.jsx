@@ -48,7 +48,7 @@ function handleClick(label)
  
   return (
     <>
-    <div className={`border border-neutral-950 h-[90vh] flex ${Theme=="Dark" ? "bg-slate-600 text-white" : ""}`}>
+    <div className={`border border-neutral-950 h-[90vh] flex ${Theme=="Dark" ? "bg-slate-700 text-white" : ""}`}>
     
       <div className='border border-slate-800  h-full w-[25vw] min-w-72 p-3 overflow-y-auto'>
         <div className='flex flex-col gap-4 text-[1.3rem] ' >

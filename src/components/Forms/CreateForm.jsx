@@ -31,7 +31,8 @@ import Skills from "./Employee Form/Skills";
 import Designation from "./Employee Form/Designation";
 import { getAllSkill } from "../../services/operations/skills";
 import { CgProfile } from "react-icons/cg";
-import SubmitButton from "../common/SubmitButton";
+import SubmitButton from "../common/buttons/SubmitButton";
+import Headings from "../common/Headings";
 
 
 const CreateForm = ({
@@ -89,7 +90,7 @@ const CreateForm = ({
   }, [departmentList, setValue]);
 
   const handleImagePreview = (e) => {
-    console.log(e);
+
     const file = e.target.files[0];
     if (file) {
       setPreview(URL.createObjectURL(file));
@@ -120,7 +121,8 @@ const CreateForm = ({
       reset();
     }
   }, [preFilled]);
-  console.log(typeof parent);
+
+
   function submissionHandler(data) {
     console.log(
       "DATTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTt",
@@ -217,7 +219,7 @@ const CreateForm = ({
           customAttributes.push({ title: key, value: data[key] });
         }
       }
-      console.log(customAttributes);
+  
       preFilled
         ? dispatch(
             editEmployeePersonalDetails(
@@ -250,27 +252,15 @@ const CreateForm = ({
     }
   }
 
-  // console.log("::::::::::::::::::::",location.state,preFilled)
 
-  console.log("MANAGER___IDDD", managerId, parent);
-
-  console.log(preFilled?.personalDetails?.skills);
 
   const departmentIdValue = watch("departmentId");
-  console.log("Current departmentId:", departmentIdValue);
+ 
 
   return (
     <div className={` flex justify-center m-4 rounded-lg p-7 flex-col gap-6 items-center ${Theme=="Dark" ? "bg-slate-800" : "bg-slate-100"}`}>
       {
-       parent!=="Employee" &&  <div className="flex text-2xl justify-between font-bold w-full">
-        <p>{location.pathname.split("/").at(-1).replaceAll("-", " ")}</p>
-        <p>
-          Home/
-          <span className="text-yellow-600">
-            {location.pathname.split("/").at(-1).replaceAll("-", " ")}
-          </span>
-        </p>
-      </div>
+       parent!=="Employee" && <Headings title={location.pathname.split("/").at(-1).replaceAll("-", " ")}/>
       }
 
       <div className=" w-full">

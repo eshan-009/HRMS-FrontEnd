@@ -4,6 +4,8 @@ import { FiEdit } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
 import { deleteRole, getAllRoles } from '../../../services/operations/Roles';
 import { useNavigate } from 'react-router-dom';
+import Headings from '../../../components/common/Headings';
+import NavigateToForm from '../../../components/common/buttons/NavigateToForm';
 const RoleList = () => {
   const Theme = useSelector((state)=>state.Theme.theme)
   const data = useSelector((state)=>state.Aside.roles)
@@ -23,14 +25,12 @@ const RoleList = () => {
       }
   return (
     <div className={`w-full p-5 border rounded-lg  ${Theme=="Dark" ? "bg-slate-800 text-white" : "bg-slate-100"}`}>
-<div className='flex justify-between font-bold w-full'>
-           <p>{location.pathname.split("/").at(-1).replaceAll("-"," ")}</p>
-           <p>Home/<span className='text-yellow-600'>{location.pathname.split("/").at(-1).replaceAll("-"," ")}</span></p>
-           </div>
 
-      <button 
-      onClick={()=>navigate("/home/Create-Sub-Organization")}
-      className="p-2 bg-red-500 mt-7 rounded text-white ">Add Sub Organization</button>
+      <Headings title={location.pathname.split("/").at(-1).replaceAll("-"," ")} />
+
+      <NavigateToForm     onClick={()=>navigate("/home/Create-Role")} buttonText={"Add new Role"}/>
+
+
 
     <div className='border rounded-lg overflow-hidden mt-9'>
     <table className='w-full'>
@@ -53,9 +53,11 @@ const RoleList = () => {
          <div className='flex items-center gap-3'>
    
          <FiEdit 
+         className={`${Theme=="Dark" ? "text-blue-300" : "text-blue-300"}`}
         onClick={()=>editHandler(item)}
         />
         <MdDelete
+        className='text-red-500'
         onClick={()=>deleteHandler(item._id)}
         />
          </div>
