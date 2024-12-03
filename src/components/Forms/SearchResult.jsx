@@ -19,7 +19,7 @@ const SearchResult = ({setSearchTerm,setManagerId}) => {
     // ]
 // console.log(serachResult)
   return (
-    <div className=' w-full'>
+    <div className=' w-full max-w-96'>
         {/* <ul> */}
       {
             serachResult && serachResult.map((item)=><input 

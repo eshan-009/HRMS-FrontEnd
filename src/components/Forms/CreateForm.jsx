@@ -263,7 +263,7 @@ const CreateForm = ({
        parent!=="Employee" && <Headings title={location.pathname.split("/").at(-1).replaceAll("-", " ")}/>
       }
 
-      <div className=" w-full">
+      <div className="w-full">
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -468,7 +468,7 @@ const CreateForm = ({
           )}
 
           {parent === "Department" && (
-            <div className="flex justify-center w-full">
+            <div className="flex flex-col items-center w-full">
            
               <InputField
                 type="search"

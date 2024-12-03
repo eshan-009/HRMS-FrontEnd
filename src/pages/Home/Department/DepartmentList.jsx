@@ -11,6 +11,7 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import AssignmentButton from '../../../components/common/buttons/AssignmentButton';
 import Headings from '../../../components/common/Headings';
 import NavigateToForm from '../../../components/common/buttons/NavigateToForm';
+import ActionHandler from '../../../components/common/ActionHandler';
 const DepartmentList = () => {
   const refreshState = useSelector((state)=>state.Refresh.count)
   const Theme = useSelector((state)=>state.Theme.theme)
@@ -51,10 +52,10 @@ console.log(refreshState)
   async function editHandler(data){
    console.log(data)
     const newData = {...data}
-    console.log("newDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewData",newData)
-    await dispatch(getEmployeeById(data.manager))
+    console.log("newDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewDatanewData",newData,data?.manager)
+    // await dispatch(getEmployeeById(data?.manager?._id))
     newData.manager = manager?.personalDetails?.firstName+" "+manager?.personalDetails?.lastName
-    console.log("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",newData.manager)
+   
     navigate("/home/Create-Department",{state : {preFilled : newData }})
       }
 
@@ -144,14 +145,19 @@ return (
         <td>{item.branch ? <AssignmentButton onClick={()=>removeBranch(item._id,item.branch)} buttonText={"UnAssign"}/>:<AssignmentButton onClick={()=>subOrganizationAssignHandler(item)} buttonText={"Assign"}  />}</td>
 
         <td >
+          {/* <ActionHandler
+          editHandler={()=>editHandler(item,navigate)}
+          deleteHandler={()=>deleteHandler(item._id,navigate)}
+          /> */}
+          
         <div className='flex items-center gap-3'>
         <FiEdit 
         className='text-blue-500 '
-        onClick={()=>editHandler(item,navigate)}
+        onClick={()=>editHandler(item)}
         />
         <MdDelete
         className=' text-red-500'
-        onClick={()=>deleteHandler(item._id,navigate)}
+        onClick={()=>deleteHandler(item._id)}
         />
         </div>
         </td>

@@ -3,8 +3,11 @@ import { FiEdit } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
 import { addLocation, addTiming, deleteLocation, deleteTiming, editLocation, editTiming, getAttendenceData } from '../../../services/operations/Attendence';
+import Headings from '../../../components/common/Headings';
+import { useLocation } from 'react-router-dom';
 
 const ConfigureShift = () => {
+  const Theme = useSelector((state)=>state.Theme.theme)
     const dispatch = useDispatch()
     const button = useRef("Submit");
     const locationButton = useRef("Add Location");
@@ -65,41 +68,21 @@ function editLocationHandler(data){
     // const latitude =Number(data.latitude.$numberDecimal)
     // const longitude =  Number(data.longitude.$numberDecimal)
 }
+const locationHook = useLocation()
 
   return (
-    <div className='flex  p-5 gap-3'>
-  
-      <div className='border w-1/2 flex flex-col items-center text-center'>
-      <div className='flex flex-col gap-3'>
-        <h1>Add Shift Details</h1>
+    <div className={`flex flex-col p-5 gap-3 rounded-lg ${Theme=="Dark"?"bg-slate-800 text-white" : "bg-white text-black"}`}>
+      <Headings title={locationHook.pathname.split("/").at(-1).replaceAll("-"," ")}/>
+    
+
+   <div className='flex  p-5 gap-3  '>
+   <div className={`border w-1/2 flex flex-col items-center text-center ${Theme=="Dark" ? "bg-slate-800 text-white" : "bg-slate-100 text-black"} pb-5 `}>
+      <div className='flex flex-col gap-3 '>
+        <h1 className='text-xl font-bold my-5'>Add Shift Details</h1>
 
        
         <p>Shift Timings (HH:mm)</p>
- {/* <div className='max-h-40 border border-green-400 overflow-y-hidden'>
-    
- <select
- className=' px-4 py-2 text-gray-700 bg-gray-100 border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none appearance-none'
- onChange={(e)=>setHours(e.target.value)}>
-        <option value={null}>HH</option>
-       { Hrs.map((item)=><option value={item}>{item}</option>)}
-        </select>
 
-        <select
-         className=' px-4 py-2 text-gray-700 bg-gray-100 border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none appearance-none'
-
-        onChange={(e)=>setMinutes(e.target.value)} >
-        <option value={null}>mm</option>
-       { Min.map((item)=><option value={item}>{item}</option>)}
-        </select>
-
-        <select
-         className=' px-4 py-2 text-gray-700 bg-gray-100 border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none appearance-none'
-
-        onChange={(e)=>setMeridian(e.target.value)}>
-            <option value={"AM"}>AM</option>
-            <option value={"PM"}>PM</option>
-        </select>
- </div> */}
 
  <input
  className='border p-2'
@@ -109,7 +92,7 @@ function editLocationHandler(data){
  />
         <button 
         onClick={()=>shiftTimeHandler()}
-        className='bg-blue-700 text-white p-2 rounded-md  mx-auto'>{button.current}</button>
+        className='bg-blue-700 text-white p-2 rounded-md  mx-auto mb-3'>{button.current}</button>
       </div>
 
       <div>
@@ -132,9 +115,9 @@ function editLocationHandler(data){
       </div>
 
 
-      <div className='border w-1/2 flex flex-col items-center text-center'>
+      <div className={`border w-1/2 flex flex-col items-center text-center ${Theme=="Dark" ? "bg-slate-800 text-white" : "bg-slate-100 text-black"} pb-5`}>
       <div className='flex flex-col gap-3' >
-        <h1>Add Attendence Location</h1>
+        <h1 className='text-xl font-bold my-5'>Add Attendence Location</h1>
         <p>Location Name</p>
         <input
         className='border p-2'
@@ -146,10 +129,10 @@ function editLocationHandler(data){
         onClick={()=>{
             getLocation()
         }}
-        className='bg-blue-700 text-white p-2 rounded-md   mx-auto'>{ locationButton.current}</button>
+        className='bg-blue-700 text-white p-2 rounded-md   mx-auto mb-3'>{ locationButton.current}</button>
       </div>
 
-      <div>
+      <div >
         <p>Attendence Locations</p>
         {
             console.log(attendenceData?.locations)
@@ -157,7 +140,7 @@ function editLocationHandler(data){
         {
           attendenceData?.locations && attendenceData?.locations.map((item)=>{
           
-                return <div className='flex justify-center gap-5'>
+                return <div className='flex justify-center gap-5 '>
 
 <p>{item?.name}</p>
                 <div className='flex items-center gap-3'>
@@ -176,6 +159,7 @@ function editLocationHandler(data){
        
       </div>
       </div>
+   </div>
     </div>
   )
 }

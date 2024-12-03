@@ -9,6 +9,7 @@ import Modal from '../../../components/common/Modal';
 import AssignmentButton from '../../../components/common/buttons/AssignmentButton';
 import Headings from '../../../components/common/Headings';
 import NavigateToForm from '../../../components/common/buttons/NavigateToForm';
+import ActionHandler from '../../../components/common/ActionHandler';
 const EmployeeList = () => {
   const refreshState = useSelector((state)=>state.Refresh.count)
   const Theme = useSelector((state)=>state.Theme.theme)
@@ -74,12 +75,10 @@ return (
           onChange={(e)=>{
               e.preventDefault()
                setDepartmentId(e.target.value)
-              console.log("Changed========>",e.target.value)
+       
               if(e.target.value=="All")
               {
                   dispatch(getAllEmployees())
-                  console.log("Changed========>",e.target.value)
-              
               }
             else{
               dispatch(getEmployeesByDepartment(e.target.value))
@@ -123,17 +122,11 @@ return (
         // <button onClick={()=>dispatch(removeDepartmentFromEmployee(item?._id,item?.personalDetails?.department))} className='bg-yellow-300 p-2'>UnAssign</button>
          : <AssignmentButton onClick={(e)=>handleAssign(e,item)} buttonText={"Assign"}/>}</td>
         <td >
-        <div className='flex items-center gap-3'>
-        <FiEdit 
-        className={` hover:scale-125 ${Theme=="Dark"?"text-blue-300" : "text-blue-500"}`}
-        onClick={()=>editHandler(item)}
-        />
-      
-        <MdDelete
-        className='text-red-500 hover:scale-125'
-        onClick={()=>deleteHandler(item._id)}
-        />
-        </div>
+          <ActionHandler
+           editHandler={()=>editHandler(item)}
+           deleteHandler={()=>deleteHandler(item._id)}
+          />
+
         </td>
       </tr>))
      }
