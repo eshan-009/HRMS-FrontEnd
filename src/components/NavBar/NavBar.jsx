@@ -5,7 +5,7 @@ import { WiNightAltCloudy } from "react-icons/wi";
 import { useDispatch, useSelector } from 'react-redux';
 import UserData from './UserData';
 import { setTheme } from '../../redux/slices/themeSlice';
-
+import { SiTheboringcompany } from "react-icons/si";
 const NavBar = () => {
   const dispatch = useDispatch()
   const isLoggedIn = useSelector((state)=>state.Auth.isLoggedIn) 
@@ -19,7 +19,8 @@ const NavBar = () => {
     <>
       <nav className={`w-full h-[10vh]  flex flex-row items-center justify-between shadow-xl  px-9 ${Theme=="Dark" ? "bg-slate-800 text-white" : ""} `}>
         <div className="flex items-center">
-          <img className="h-20 w-20 p-2" src={Avisoft} alt="Avi Logo" />
+          {/* <img className="h-20 w-20 p-2" src={Avisoft} alt="Avi Logo" /> */}
+          <SiTheboringcompany size={100} />
         </div>
 
         <div className="flex items-center gap-5">

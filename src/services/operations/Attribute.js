@@ -7,7 +7,7 @@ const {GET_CUSTOMATTRIBUTES,ADD_CUSTOMATTRIBUTES,EDIT_CUSTOMATTRIBUTES,DELETE_CU
 export const getAttributes = (parent)=>{
     return async(dispatch)=>{
         try{
-            console.log("parent===========>>>>>",parent)
+           
             const token = localStorage.getItem("token")
             const body = {
                 parent:parent
@@ -57,7 +57,7 @@ export const addAttribute = (title,parent)=>{
                 "Content-type": "application/json; charset=UTF-8",
                 "Authorization" : `Bearer ${token}`
             })
-            console.log(response)
+          
             if(response.data.success)
             {
                

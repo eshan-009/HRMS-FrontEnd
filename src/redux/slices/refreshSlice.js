@@ -16,7 +16,7 @@ const refreshSlice = createSlice({
             {
                 state.count = 1
             }
-           console.log(state)
+         
         }
     }
 })

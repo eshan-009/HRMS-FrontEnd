@@ -1,34 +1,31 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 
-import OrganizationForm from '../../../components/Forms/CreateForm';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAttributes } from '../../../services/operations/Attribute';
-import CreateForm from '../../../components/Forms/CreateForm';
-
+import OrganizationForm from "../../../components/Forms/CreateForm";
+import { useDispatch, useSelector } from "react-redux";
+import { getAttributes } from "../../../services/operations/Attribute";
+import CreateForm from "../../../components/Forms/CreateForm";
 
 const CreateOrganization = () => {
-const dispatch = useDispatch()
-const parent = location.pathname.split("/").at(-1).replace("-"," ").split(" ")[1]
-// console.log("Parent-=-=-=-=-=--=-=>>>>>>",parent)
-const customAttributes = useSelector((state)=>state.Attribute.organization)
-useEffect(()=>{
-  dispatch(getAttributes(parent))
-},[])
+  const dispatch = useDispatch();
+  const parent = location.pathname
+    .split("/")
+    .at(-1)
+    .replace("-", " ")
+    .split(" ")[1];
+  // console.log("Parent-=-=-=-=-=--=-=>>>>>>",parent)
+  const customAttributes = useSelector((state) => state.Attribute.organization);
+  useEffect(() => {
+    dispatch(getAttributes(parent));
+  }, []);
 
-console.log("CUSTOMMMM____+++++++_____+++++++",customAttributes)
-return(
-  <>
-  <CreateForm 
-  customAttributes={customAttributes}
-  parent={parent}
-/>
-  </>
-)
-}
+  return (
+    <>
+      <CreateForm customAttributes={customAttributes} parent={parent} />
+    </>
+  );
+};
 
-export default CreateOrganization
-
-
+export default CreateOrganization;
 
 // const CreateOrganization = () => {
 //   const [image, setImage] = useState(null);
@@ -105,4 +102,3 @@ export default CreateOrganization
 //     </>
 //   );
 // };
-

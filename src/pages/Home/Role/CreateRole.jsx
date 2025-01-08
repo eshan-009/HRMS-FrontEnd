@@ -7,7 +7,7 @@ import { addRole, editRole } from "../../../services/operations/Roles";
 import { AiOutlineCheck } from "react-icons/ai";
 import SubmitButton from "../../../components/common/buttons/SubmitButton";
 const CreateRole = () => {
-  const Theme = useSelector((state)=>state.Theme.theme)
+  const Theme = useSelector((state) => state.Theme.theme);
   const location = useLocation();
   const preFilled = location?.state?.preFilled;
   const dispatch = useDispatch();
@@ -35,57 +35,55 @@ const CreateRole = () => {
   ];
   const [currTab, setCurrTab] = useState("EMPLOYEE");
   const [selectAll, setSelectAll] = useState(false);
-  const [selectCategory, setSelectCategory] = preFilled ? useState(preFilled?.selectedCategories) : useState([]); 
+  const [selectCategory, setSelectCategory] = preFilled
+    ? useState(preFilled?.selectedCategories)
+    : useState([]);
   const accessList = useSelector((state) => state.Aside.accessList);
 
   // useEffect(()=>{
   //   console.log(preFilled,preFilled?.selectedCategories)
   //   preFilled && setSelectCategory(preFilled?.selectedCategories)
   // })
-console.log("selectCategory",selectCategory)
-const [checks, setChecks] = useState({})
- useEffect(()=>{
-  
- 
+  const [checks, setChecks] = useState({});
+  useEffect(() => {
     const allChecks = accessList.reduce((acc, item) => {
       acc[item] = preFilled?.accessList?.includes(item) || false;
       return acc;
-    }, {})
+    }, {});
 
-    setChecks(allChecks)
- },[accessList,preFilled])
+    setChecks(allChecks);
+  }, [accessList, preFilled]);
 
   function updateAllCheckboxes(value) {
     const updatedChecks = Object.keys(checks).reduce((acc, key) => {
       let isSelected;
-      isSelected = selectCategory.length>0 && selectCategory.some((item)=>key.includes(item))
-      acc[key] = isSelected ||  value;
+      isSelected =
+        selectCategory.length > 0 &&
+        selectCategory.some((item) => key.includes(item));
+      acc[key] = isSelected || value;
       return acc;
     }, {});
 
-  
     setChecks(updatedChecks);
   }
 
   useEffect(() => {
-   
     updateAllCheckboxes(selectAll);
-  }, [selectAll,selectCategory]);
+  }, [selectAll, selectCategory]);
 
-  useEffect(()=>{
-    
-    const data =  selectCategory.length>0 && selectCategory.reduce((acc,key)=>{
-        
-      acc[key] = true
-      return acc
-    },{})
-    console.log("selectCategory",data)
+  useEffect(() => {
+    const data =
+      selectCategory.length > 0 &&
+      selectCategory.reduce((acc, key) => {
+        acc[key] = true;
+        return acc;
+      }, {});
     // setChecks()
-  },[selectCategory])
+  }, [selectCategory]);
 
   function checkHandler(e) {
     e.preventDefault();
-    console.log(e.target.name);
+
     const timerId = setTimeout(() => {
       setChecks((prev) => {
         return {
@@ -106,11 +104,10 @@ const [checks, setChecks] = useState({})
     for (let key in checks) {
       checks[key] && accessList.push(key);
     }
-    console.log(roleName,accessList,selectCategory);
-    
-    preFilled 
-    ? dispatch(editRole(preFilled?._id,roleName,accessList,selectCategory))
-    : dispatch(addRole(roleName,accessList,selectCategory))
+
+    preFilled
+      ? dispatch(editRole(preFilled?._id, roleName, accessList, selectCategory))
+      : dispatch(addRole(roleName, accessList, selectCategory));
   }
 
   function tabHandler(e, item) {
@@ -120,58 +117,60 @@ const [checks, setChecks] = useState({})
     console.log(currTab, item.toUpperCase().split(" ")[0]);
   }
 
-
-  function toggleCategory(e){
+  function toggleCategory(e) {
     {
       e.preventDefault();
-     const timerId = setTimeout(()=>{
-      if(selectCategory.includes(currTab))
-        {
-          setSelectCategory((prev)=>{
-            return prev.filter((elem)=>elem!==currTab)
-          })
-
-        }
-        else
-        {
-          setSelectCategory((prev)=>{
-            return [...prev,currTab]
+      const timerId = setTimeout(() => {
+        if (selectCategory.includes(currTab)) {
+          setSelectCategory((prev) => {
+            return prev.filter((elem) => elem !== currTab);
+          });
+        } else {
+          setSelectCategory((prev) => {
+            return [...prev, currTab];
           });
         }
-     },100)
+      }, 100);
 
-     return ()=>{
-      clearTimeout(timerId)
-     }
+      return () => {
+        clearTimeout(timerId);
+      };
     }
   }
-console.log(preFilled)
-  
-  // console.log(checks,currTab)
+
   return (
-    <div className={` p-2 rounded-lg ${Theme=="Dark" ? "bg-slate-800" : "bg-slate-100"}`}>
-
-
-           <div className='flex justify-between font-bold w-full p-5 text-xl'>
-           <p>{location.pathname.split("/").at(-1).replaceAll("-"," ")}</p>
-           <p>Home / <span className='text-yellow-600'>{location.pathname.split("/").at(-1).replaceAll("-"," ")}</span></p>
-           </div>
-
-      <div className="ml-11 mb-3">
- 
-      <p className="font-bold my-3">Workflow to create a role</p>
-      <p>1. Fill out the role name</p>
-      <p>2. Select the appropriate tab to view the priveleges related to a specific group (e.g. :- Department,Employee etc)</p>
-      <p>3. Check the boxes for priveleges you want to assign to the role</p>
+    <div
+      className={` p-2 rounded-lg ${
+        Theme == "Dark" ? "bg-slate-800" : "bg-slate-100"
+      }`}
+    >
+      <div className="flex justify-between font-bold w-full p-5 text-xl">
+        <p>{location.pathname.split("/").at(-1).replaceAll("-", " ")}</p>
+        <p>
+          Home /{" "}
+          <span className="text-yellow-600">
+            {location.pathname.split("/").at(-1).replaceAll("-", " ")}
+          </span>
+        </p>
       </div>
 
-    
+      <div className="ml-11 mb-3">
+        <p className="font-bold my-3">Workflow to create a role</p>
+        <p>1. Fill out the role name</p>
+        <p>
+          2. Select the appropriate tab to view the priveleges related to a
+          specific group (e.g. :- Department,Employee etc)
+        </p>
+        <p>3. Check the boxes for priveleges you want to assign to the role</p>
+      </div>
 
       <form onSubmit={handleSubmit((data) => submissionHandler(data.roleName))}>
         <label className="flex flex-col m-3 mt-8 ">
           <sup className="font-bold text-sm">Role Name *</sup>
           <input
-            className={`border m-2 p-2 shadow-md rounded my-4 ${Theme=="Dark" ? "bg-slate-800 border-slate-400" : ""}`}
+            className={`border m-2 p-2 shadow-md rounded my-4 ${
+              Theme == "Dark" ? "bg-slate-800 border-slate-400" : ""
+            }`}
             defaultValue={preFilled?.title}
             placeholder="Enter Role name "
             {...register("roleName", { required: true })}
@@ -191,7 +190,9 @@ console.log(preFilled)
                 clearTimeout(timerId);
               };
             }}
-            className={`w-4 h-4 translate-y-1 appearance-none mr-2 border-2 ${Theme=="Dark" ? "border-white" : "border-gray-300"}  rounded  checked:border-blue-500 checked:bg-blue-500 `}
+            className={`w-4 h-4 translate-y-1 appearance-none mr-2 border-2 ${
+              Theme == "Dark" ? "border-white" : "border-gray-300"
+            }  rounded  checked:border-blue-500 checked:bg-blue-500 `}
             checked={selectAll}
             type="checkbox"
           />
@@ -204,30 +205,32 @@ console.log(preFilled)
         </label>
 
         <div className="my-5">
-        {tabs &&
-        tabs.map((item) => (
-          <button
-            onClick={(e) => {
-              tabHandler(e, item);
-            }}
-            className={` p-2 m-2 rounded  ${
-              currTab == item.toUpperCase().split(" ")[0]
-                ? `${Theme=="Dark" ? "bg-blue-600": "bg-blue-400"}`
-                : Theme=="Dark" ? "bg-slate-600": "bg-slate-300"
-            }`}
-          >
-            {item}
-          </button>
-        ))}
+          {tabs &&
+            tabs.map((item) => (
+              <button
+                onClick={(e) => {
+                  tabHandler(e, item);
+                }}
+                className={` p-2 m-2 rounded  ${
+                  currTab == item.toUpperCase().split(" ")[0]
+                    ? `${Theme == "Dark" ? "bg-blue-600" : "bg-blue-400"}`
+                    : Theme == "Dark"
+                    ? "bg-slate-600"
+                    : "bg-slate-300"
+                }`}
+              >
+                {item}
+              </button>
+            ))}
         </div>
-
-        
 
         <label className="flex text-orange-400 mb-4">
           <input
             onClick={(e) => toggleCategory(e)}
-            className={`w-4 h-4 translate-y-1 appearance-none mr-2 border-2  ${Theme=="Dark" ? "border-white" : "border-gray-300"} rounded  checked:border-blue-500 checked:bg-blue-500 `}
-            checked={selectCategory.includes(currTab) ? true :  false}
+            className={`w-4 h-4 translate-y-1 appearance-none mr-2 border-2  ${
+              Theme == "Dark" ? "border-white" : "border-gray-300"
+            } rounded  checked:border-blue-500 checked:bg-blue-500 `}
+            checked={selectCategory.includes(currTab) ? true : false}
             type="checkbox"
           />
           <AiOutlineCheck
@@ -245,7 +248,6 @@ console.log(preFilled)
               <div>
                 {
                   // console.log(checks[item],selectCategory.includes(currTab),item)
-                 
                 }
                 {
                   //  console.log(selectCategory.includes(currTab))
@@ -253,16 +255,23 @@ console.log(preFilled)
                 <label className="flex items-center ml-2 mb-1">
                   <input
                     type="checkbox"
-                    className={`w-4 h-4 appearance-none mr-2 border-2  ${Theme=="Dark" ? "border-white" : "border-gray-300"} rounded ${checks[item] || selectCategory.includes(currTab) ? "border-blue-500 bg-blue-500" : ""}`}
+                    className={`w-4 h-4 appearance-none mr-2 border-2  ${
+                      Theme == "Dark" ? "border-white" : "border-gray-300"
+                    } rounded ${
+                      checks[item] || selectCategory.includes(currTab)
+                        ? "border-blue-500 bg-blue-500"
+                        : ""
+                    }`}
                     onClick={(e) => checkHandler(e)}
-                
                     // checked={checks[item] || selectCategory.includes(currTab) ? true :  false}
-                  
+
                     {...register(`${item}`)}
                   />
                   <AiOutlineCheck
                     className={`${
-                      checks[item] || selectCategory.includes(currTab) ? "scale-70" : "scale-0"
+                      checks[item] || selectCategory.includes(currTab)
+                        ? "scale-70"
+                        : "scale-0"
                     } translate-x-[-1.49rem]  transition-transform duration-200 ease-out text-white`}
                   />
                   Permission to{" "}
@@ -278,11 +287,8 @@ console.log(preFilled)
               </div>
             ))}
         <div className="flex justify-center mt-9 mb-3">
-          <SubmitButton
-          buttonText={"Submit"}
-          />
+          <SubmitButton buttonText={"Submit"} />
         </div>
-        
       </form>
     </div>
   );

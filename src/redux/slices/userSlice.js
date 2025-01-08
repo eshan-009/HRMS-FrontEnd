@@ -9,15 +9,15 @@ const userSlice = createSlice({
     initialState : initialState ,
     reducers : {
         setName : (state,action)=>{
-            console.log({name : action.payload})
+          
             state.name = action.payload
         },
         setRole : (state,action)=>{
-            console.log({role : action.payload})
+          
             state.role = action.payload
         },
         setProfilePicture :(state,action)=>{
-            console.log({profilePicture : action.payload})
+       
             state.profilePicture = action.payload
         }
     } 

@@ -16,7 +16,7 @@ export const getAllRoles  = (page =1,limit =10)=>{
                 "Authorization" : `Bearer ${token}`
             })
 
-            console.log(response)
+         
             if(response.data.success)
             {
                 dispatch(setRolesData(response.data.data))
@@ -39,7 +39,7 @@ export const addRole  = (title,accessList,selectedCategories)=>{
                 roleAccessList:accessList,
                 selectedCategories : selectedCategories
             }
-            console.log(ADD_ROLE,body)
+           
             const response = await apiConnector("POST",ADD_ROLE,body,{
                 "Content-type": "application/json; charset=UTF-8",
                 "Authorization" : `Bearer ${token}`
@@ -61,7 +61,7 @@ export const editRole  = (roleId,title,accessList,selectCategory)=>{
     return async(dispatch)=>{
         try
         {
-            console.log(roleId,title,accessList,selectCategory)
+            
             const token = localStorage.getItem("token")
             const newUrl = `${EDIT_ROLE}/${roleId}`
             const body = {
@@ -75,7 +75,7 @@ export const editRole  = (roleId,title,accessList,selectCategory)=>{
                 "Authorization" : `Bearer ${token}`
             })
 
-            console.log(response)
+     
             // if(response.data.success)
             // {
                 

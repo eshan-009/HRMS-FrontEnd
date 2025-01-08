@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../services/operations/auth";
 import Avisoft from "../../assets/Avisoft.svg"
@@ -12,12 +12,13 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors,isSubmitting },
   } = useForm();
+
   return (
 
     <div className="flex flex-col  items-center w-full max-w-[30rem]"> 
      <div className='flex  mt-6 justify-center gap-4'>
          <div>
-      <img className="h-32 w-32 p-2" src={Avisoft} alt="Avi Logo" />
+      {/* <img className="h-32 w-32 p-2" src={Avisoft} alt="Avi Logo" /> */}
        <h3 className='font-serif font-bold text-2xl'> Sign-In Portal</h3>
         </div>
        </div>

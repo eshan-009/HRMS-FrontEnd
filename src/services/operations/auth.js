@@ -15,9 +15,9 @@ return async(dispatch)=>{
         email : email,
         password : password
     }
-    console.log(body,LOGIN)
+
     const response = await apiConnector("POST",LOGIN,body)
-console.log(response)
+
     if(response.data.success)
     {
         localStorage.setItem("token",response.data.token)

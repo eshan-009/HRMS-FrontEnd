@@ -18,9 +18,10 @@ const LoginPage = () => {
       navigate("/home")
     }
   },[])
+  const Theme = useSelector((state)=>state.Theme.theme)
   return(
-    <>
-<div className='flex items-center flex-col w-full  text-red-600'>
+    <div className={`h-[90vh] ${Theme == "Dark" ?"bg-slate-700 text-white" : ""}`}>
+      <div className='flex items-center flex-col w-full  text-red-600'>
 <p><b>Email</b> : dummy@dummy.com</p>
 <p><b>Password</b> : dummy$9A</p>
 </div>
@@ -33,7 +34,7 @@ const LoginPage = () => {
      <div className='flex justify-center '>
        { !isLoggedIn && <LoginForm/> }
      </div>
-    </>
+    </div>
   )
   
 

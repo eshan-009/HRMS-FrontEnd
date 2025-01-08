@@ -81,7 +81,7 @@ const CreateForm = ({
     ? useState(preFilled?.personalDetails?.profilePicture)
     : useState(null);
   useEffect(() => {
-    console.log(preview);
+
   }, [preview]);
 
   useEffect(() => {
@@ -103,7 +103,7 @@ const CreateForm = ({
     let timerId;
     if (searchTerm.trim() !== "") {
       timerId = setTimeout(() => {
-        console.log("New searchTerm", searchTerm);
+   
         dispatch(getEmployeesByName(searchTerm));
       }, 500);
     }
@@ -124,11 +124,7 @@ const CreateForm = ({
 
 
   function submissionHandler(data) {
-    console.log(
-      "DATTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTt",
-      data,
-      parent
-    );
+  
 
     if (parent === "Organization") {
       const customAttributes = [];
@@ -137,9 +133,8 @@ const CreateForm = ({
           customAttributes.push({ title: key, value: data[key] });
         }
       }
-      console.log(data, preview);
-      console.log(preFilled, preFilled?._id);
-      // console.log("customAttributes Array",customAttributes)
+   
+    
       preFilled
         ? dispatch(
             editOrganization(
@@ -159,7 +154,7 @@ const CreateForm = ({
             )
           );
     } else if (parent === "SubOrganization") {
-      console.log(data, preFilled);
+   
       const customAttributes = [];
       for (let key in data) {
         if (key !== "name" && key !== "organizationId") {
@@ -334,7 +329,7 @@ const CreateForm = ({
                     <button
                       onClick={(e) => {
                         e.preventDefault();
-                        console.log("UPLOAD EMPLOYEE PICTURE");
+                     
                       }}
                       className="cursor-pointer bg-yellow-400 text-black px-4 py-2 rounded mt-2"
                     >
@@ -425,7 +420,7 @@ const CreateForm = ({
               />
 
               <div className="flex items-center">
-                {console.log(preFilled?.personalDetails?.department)}
+            
 
                 {parent == "Employee" && (
                   <div className="flex flex-col gap-2 w-3/4">
@@ -483,7 +478,7 @@ const CreateForm = ({
                 }}
               />
            
-              {console.log("SSSSSSSSSSSSSSSS", searchTerm)}
+             
               {searchTerm && (
                 <SearchResult
                   setSearchTerm={setSearchTerm}
@@ -563,7 +558,7 @@ const CreateForm = ({
              </div>
             </div>
           )}
-          {console.log(skillData)}
+   
           <div className="flex items-center justify-between w-full mb-2">
             <div className="flex gap-3 w-1/2 flex-wrap ">
               {" "}

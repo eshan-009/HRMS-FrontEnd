@@ -13,7 +13,7 @@ export const getAllSkill = ()=>{
                 "Authorization" : `Bearer ${token}`
             })
 
-            console.log(response)
+     
 
             if(response.data.success)
             {
@@ -52,13 +52,13 @@ export const editSkill = (skillId,title)=>{
             const token = localStorage.getItem("token")
             const newUrl = `${UPDATE_SKILL}/${skillId}`
 
-            console.log(newUrl,title)
+       
             const response = await apiConnector("PUT",newUrl,{title : title},{
                 "Content-type": "application/json; charset=UTF-8",
                 "Authorization" : `Bearer ${token}`
             })
 
-            console.log(response)
+       
 
             // if(response.data.success)
             // {
@@ -78,13 +78,13 @@ export const deleteSkill = (skillId)=>{
             const token = localStorage.getItem("token")
             const newUrl = `${DELETE_SKILL}/${skillId}`
 
-            console.log(newUrl)
+         
             const response = await apiConnector("Delete",newUrl,{},{
                 "Content-type": "application/json; charset=UTF-8",
                 "Authorization" : `Bearer ${token}`
             })
 
-            console.log(response)
+         
 
         } catch(err)
         {
