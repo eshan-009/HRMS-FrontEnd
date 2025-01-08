@@ -3,14 +3,14 @@ import { IoLogOutOutline } from "react-icons/io5";
 import { VscDashboard } from "react-icons/vsc";
 import { useNavigate } from 'react-router-dom';
 import { setLoggedIn } from '../../redux/slices/authSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 const Tooltip = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
   return (
-    <div className='absolute  top-8 right-7  w-1/6 flex flex-col items-center  '>
-    <div className=' w-7 h-7 bg-slate-300 rotate-45 translate-y-6 -z-20'></div>
-    <div className=' bg-slate-300 p-3 w-full rounded-lg flex flex-col items-start justify-center'>
+    <div className='absolute  top-11 right-16 bg- max-w-1/6 flex flex-col items-center  '>
+    <div className={`w-7 h-7 bg-slate-400 rotate-45 translate-y-6 z-20 `}></div>
+    <div className=' bg-slate-400 p-3 w-full rounded-lg flex flex-col items-start justify-center'>
       <p className='flex gap-2 items-center'><VscDashboard />DashBoard</p>
       <p 
       onClick={(e)=>{

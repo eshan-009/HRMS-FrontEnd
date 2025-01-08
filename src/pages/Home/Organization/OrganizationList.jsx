@@ -7,6 +7,7 @@ import { deleteOrganization } from "../../../services/operations/Organization";
 import { useNavigate } from "react-router-dom";
 import { IoAddCircleOutline } from "react-icons/io5";
 import Headings from "../../../components/common/Headings";
+import NavigateToForm from "../../../components/common/buttons/NavigateToForm";
 const OrganizationList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,13 +36,11 @@ const OrganizationList = () => {
         title={location.pathname.split("/").at(-1).replaceAll("-", " ")}
       />
 
-      <button
+      <NavigateToForm
         onClick={() => navigate("/home/Create-Organization")}
-        className="p-2 bg-red-500 mt-7 rounded text-white flex items-center gap-2"
-      >
-        <IoAddCircleOutline />
-        Add Organization
-      </button>
+        buttonText={"Add Sub Organization"}
+      />
+
       <div className="border rounded-lg overflow-hidden mt-10 mb-7">
         <table className="w-full">
           <thead className="w-full text-left ">

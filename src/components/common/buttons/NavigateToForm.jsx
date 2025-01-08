@@ -6,7 +6,7 @@ const NavigateToForm = ({onClick,buttonText}) => {
   return (
     <button
     onClick={onClick}
-    className={`p-2 rounded hover:scale-95 min-w-24 bg-red-500 text-white flex items-center gap-2 `} >
+    className={`p-2 rounded hover:scale-95 min-w-24 bg-red-500 text-white flex items-center gap-2 transition-all `} >
     <IoAddCircleOutline size={20}/>{buttonText}
        </button>
   )
