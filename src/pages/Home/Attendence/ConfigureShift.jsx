@@ -85,7 +85,7 @@ const locationHook = useLocation()
 
 
  <input
- className='border p-2'
+ className='border p-2 text-black'
  value={time}
  onChange={(e)=>setTime(e.target.value)}
  placeholder='HH:MM'
@@ -120,7 +120,7 @@ const locationHook = useLocation()
         <h1 className='text-xl font-bold my-5'>Add Attendence Location</h1>
         <p>Location Name</p>
         <input
-        className='border p-2'
+        className='border p-2 text-black'
         value={location}
         placeholder='Location Name'
         onChange={(e)=>setLocation(e.target.value)}
