@@ -12,10 +12,10 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors,isSubmitting },
   } = useForm();
-
+  const Theme = useSelector((state) => state.Theme.theme);
   return (
 
-    <div className="flex flex-col  items-center w-full max-w-[30rem]"> 
+    <div className={`flex flex-col  items-center w-full max-w-[30rem]  ${Theme=="Dark" ? "text-gray-300" : "text-black"}`}> 
      <div className='flex  mt-6 justify-center gap-4'>
          <div>
       {/* <img className="h-32 w-32 p-2" src={Avisoft} alt="Avi Logo" /> */}
@@ -38,7 +38,7 @@ const LoginForm = () => {
               <input
                 type="email"
                 placeholder="Enter your Email"
-                className="p-2 border border-gray-400 rounded"
+                className={`p-2 border border-gray-400 rounded ${Theme=="Dark" ? "text-black bg-slate-200" : ""}`}
                 {...register("email", { required: true })}
               />
               {errors.email && <div className="text-sm text-red-600 ">* Please enter your email</div>}
@@ -48,7 +48,7 @@ const LoginForm = () => {
               <input
                 type="password"
                 placeholder="Enter your password"
-                className="p-2 border border-gray-400 rounded"
+                className={`p-2 border border-gray-400 rounded  ${Theme=="Dark" ? "text-black bg-slate-200" : ""}`}
                 {...register("password", { required: true })}
               />
               {errors.password && <div>Please enetr your password</div>}
