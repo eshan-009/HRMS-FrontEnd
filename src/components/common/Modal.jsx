@@ -9,18 +9,18 @@ const Modal = ({setModal,organizationId,branchId,assignOrganization,setOrganizat
         dispatch(getSubOrganizations())
     },[])
     const data = parent=="Employee"? useSelector((state)=>state.Aside.departments) :(!isSuborg ?  useSelector((state)=>state.Aside.organizations) : useSelector((state)=>state.Aside.subOrganizations))
- 
-    console.log(data,isSuborg)
+   const Theme = useSelector((state) => state.Theme.theme);
+
   return (
-    <div className=' h-full bg-transparent z-50 fixed top-0 left-0 right-0 border backdrop-blur-sm flex justify-center items-center  '>
+    <div className=' h-full bg-transparent z-50 fixed top-0 left-0 right-0 border backdrop-blur-sm flex justify-center items-center text-black '>
         
          {
          
-           <div className='flex flex-col opacity-100 bg-white p-9 rounded-3xl'>
+           <div className={`flex flex-col absolute opacity-100  p-9 rounded-3xl ${Theme=="Dark" ? "bg-slate-700 text-white" :"bg-white"}`}>
             <h1 className='mx-auto mb-7 text-2xl'>Assign {parent=="Employee" ? "Department" : parent=="subOrganization" ? "Organization" : parent=="Department" && isSuborg ? "Branch" : "Organization"} </h1>
           {/* <label htmlFor="organizationId">{isSuborg ? "Select a branch" : "Select a organization" }</label> */}
           <select 
-                           className={`appearance-none w-full min-w-72 max-w-96 p-2 drop-shadow-lg border-2 rounded mb-3 mx-auto `}
+                           className={`appearance-none w-full min-w-72 max-w-96 p-2 drop-shadow-lg border-2 rounded mb-3 mx-auto ${Theme=="Dark" ? "bg-slate-700 text-white" :"bg-white"} `}
 
           onClick={(e)=>{
           
