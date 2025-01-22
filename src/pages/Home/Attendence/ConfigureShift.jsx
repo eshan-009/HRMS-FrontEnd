@@ -71,12 +71,12 @@ function editLocationHandler(data){
 const locationHook = useLocation()
 
   return (
-    <div className={`flex flex-col p-5 gap-3 rounded-lg ${Theme=="Dark"?"bg-slate-800 text-white" : "bg-white text-black"}`}>
+    <div className={`flex flex-col p-5 gap-3 rounded-lg mt-10 ${Theme=="Dark"?"bg-slate-800 text-white" : "bg-white text-black"}`}>
       <Headings title={locationHook.pathname.split("/").at(-1).replaceAll("-"," ")}/>
     
 
-   <div className='flex  p-5 gap-3  '>
-   <div className={`border w-1/2 flex flex-col items-center text-center ${Theme=="Dark" ? "bg-slate-800 text-white" : "bg-slate-100 text-black"} pb-5 `}>
+   <div className='flex max-sm:flex-col  p-5 gap-3  '>
+   <div className={`border w-1/2 max-sm:w-full flex flex-col items-center text-center ${Theme=="Dark" ? "bg-slate-800 text-white" : "bg-slate-100 text-black"} pb-5 `}>
       <div className='flex flex-col gap-3 '>
         <h1 className='text-xl font-bold my-5'>Add Shift Details</h1>
 
@@ -115,7 +115,7 @@ const locationHook = useLocation()
       </div>
 
 
-      <div className={`border w-1/2 flex flex-col items-center text-center ${Theme=="Dark" ? "bg-slate-800 text-white" : "bg-slate-100 text-black"} pb-5`}>
+      <div className={`border w-1/2 max-sm:w-full flex flex-col items-center text-center ${Theme=="Dark" ? "bg-slate-800 text-white" : "bg-slate-100 text-black"} pb-5`}>
       <div className='flex flex-col gap-3' >
         <h1 className='text-xl font-bold my-5'>Add Attendence Location</h1>
         <p>Location Name</p>

@@ -70,7 +70,7 @@ const EmployeeList = () => {
 
   return (
     <div
-      className={`p-5 bg-slate-100 rounded ${
+      className={`p-5 bg-slate-100 rounded mt-10 ${
         Theme == "Dark" ? "bg-slate-800 text-white" : "bg-slate-100"
       }`}
     >

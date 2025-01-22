@@ -28,7 +28,7 @@ const OrganizationList = () => {
   }
   return (
     <div
-      className={`w-full p-5 border rounded-lg ${
+      className={`w-full p-5 border rounded-lg mt-10 ${
         Theme == "Dark" ? "bg-slate-800 text-white" : "bg-slate-100"
       }`}
     >

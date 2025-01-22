@@ -67,9 +67,11 @@ const [showMenu,setShowMenu] = useState(false)
          
         `}
       </style>
-        <div className={` my-component ${Theme=="Dark" ? "bg-slate-700" :"bg-slate-100"}  h-full ${showMenu ? "w-[20%] max-md:w-[50%] max-xs:w-[80%] min-w-72 p-3 border border-slate-800 absolute z-40  max-h-[89.9vh] " : "hidden"}    overflow-y-auto`}>
+
+        <div className={` my-component ${Theme=="Dark" ? "bg-slate-700" :"bg-slate-100"}  h-full ${showMenu ? "w-[20%] max-md:w-[50%] max-xs:w-[80%] min-w-72 p-3 border border-slate-800 max-md:absolute z-40  max-h-[89.9vh] " : "max-md:hidden"}    overflow-y-auto`}>
    <div className="flex flex-col gap-4 text-[1.3rem] ">
    {/* <p onClick={()=>setShowMenu((prev)=>!prev)}><IoMdMenu/></p> */}
+ 
    {   showMenu &&   <p
               onClick={() => dispatch(getUserById())}
               className={`flex items-center gap-2 py-2 rounded-lg mt-14 ${
@@ -80,7 +82,7 @@ const [showMenu,setShowMenu] = useState(false)
               <MdOutlineDashboard />
               Dashboard
             </p>}
-
+         
             {showMenu && data &&
               data.map((item, index) => {
                 return (

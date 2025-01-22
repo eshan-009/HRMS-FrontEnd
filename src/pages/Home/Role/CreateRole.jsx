@@ -140,7 +140,7 @@ const CreateRole = () => {
 
   return (
     <div
-      className={` p-2 rounded-lg ${
+      className={` p-2 rounded-lg mt-10 ${
         Theme == "Dark" ? "bg-slate-800" : "bg-slate-100"
       }`}
     >

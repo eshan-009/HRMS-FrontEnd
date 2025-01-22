@@ -64,7 +64,7 @@ const SubOrganizationList = () => {
 
   return (
     <div
-      className={`p-5  rounded ${
+      className={`p-5  rounded mt-10 ${
         Theme == "Dark" ? "bg-slate-800 text-white" : "bg-slate-100"
       }`}
     >
