@@ -253,7 +253,7 @@ const CreateForm = ({
  
 
   return (
-    <div className={` flex justify-center m-4 rounded-lg p-7 flex-col gap-6 items-center ${Theme=="Dark" ? "bg-slate-800" : "bg-slate-100"}`}>
+    <div className={` mt-14 flex justify-center m-4 rounded-lg p-7 flex-col gap-6 items-center min-w-96 ${Theme=="Dark" ? "bg-slate-800" : "bg-slate-100"}`}>
       {
        parent!=="Employee" && <Headings title={location.pathname.split("/").at(-1).replaceAll("-", " ")}/>
       }
