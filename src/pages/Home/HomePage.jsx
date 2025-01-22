@@ -55,7 +55,7 @@ const [showMenu,setShowMenu] = useState(false)
         }`}
       >
       
-        <p className={`absolute p-2 m-3   bg-slate-500 rounded-xl `} onClick={()=>setShowMenu((prev)=>!prev)}><IoMdMenu size={30}/></p>
+        <p className={`absolute p-2 m-3 z-50 cursor-pointer ${Theme=="Dark" ? "bg-slate-500" :"bg-slate-300"}  rounded-xl `} onClick={()=>setShowMenu((prev)=>!prev)}><IoMdMenu size={30}/></p>
         <style>
         {`
           .my-component::-webkit-scrollbar {
@@ -67,7 +67,7 @@ const [showMenu,setShowMenu] = useState(false)
          
         `}
       </style>
-        <div className={` my-component h-full ${showMenu ? "w-[25vw] min-w-72 p-3 border border-slate-800" : "w-[0vw]"}    overflow-y-auto`}>
+        <div className={` my-component ${Theme=="Dark" ? "bg-slate-700" :"bg-slate-100"}  h-full ${showMenu ? "w-[20%] max-md:w-[50%] max-xs:w-[80%] min-w-72 p-3 border border-slate-800 absolute z-40  max-h-[89.9vh] " : "hidden"}    overflow-y-auto`}>
    <div className="flex flex-col gap-4 text-[1.3rem] ">
    {/* <p onClick={()=>setShowMenu((prev)=>!prev)}><IoMdMenu/></p> */}
    {   showMenu &&   <p
