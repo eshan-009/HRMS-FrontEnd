@@ -10,11 +10,12 @@ import { BiCircle } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "../../services/operations/Employee";
 import { getAsideTabs } from "../../services/operations/AsideBar";
+import { IoMdMenu } from "react-icons/io";
 const HomePage = () => {
   const Theme = useSelector((state) => state.Theme.theme);
   const dispatch = useDispatch();
   const location = useLocation();
-
+const [showMenu,setShowMenu] = useState(false)
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   // const fetchTabs = async()=>{
@@ -43,27 +44,44 @@ const HomePage = () => {
     });
   }
 
+
+
   return (
     <>
+    
       <div
         className={`border border-neutral-950 h-[90vh] flex ${
           Theme == "Dark" ? "bg-slate-700 text-white" : ""
         }`}
       >
-        <div className="border border-slate-800  h-full w-[25vw] min-w-72 p-3 overflow-y-auto">
-          <div className="flex flex-col gap-4 text-[1.3rem] ">
-            <p
+      
+        <p className={`absolute p-2 m-3  ${showMenu ? "left-[15vw]" : ""}  bg-slate-500 rounded-xl `} onClick={()=>setShowMenu((prev)=>!prev)}><IoMdMenu size={30}/></p>
+        <style>
+        {`
+          .my-component::-webkit-scrollbar {
+            display: none;
+          }
+          .my-component {
+          scrollbarWidth : none
+          }
+         
+        `}
+      </style>
+        <div className={` my-component h-full ${showMenu ? "w-[25vw] min-w-72 p-3 border border-slate-800" : "w-[0vw]"}    overflow-y-auto`}>
+   <div className="flex flex-col gap-4 text-[1.3rem] ">
+   {/* <p onClick={()=>setShowMenu((prev)=>!prev)}><IoMdMenu/></p> */}
+   {   showMenu &&   <p
               onClick={() => dispatch(getUserById())}
-              className={`flex items-center gap-2 py-2 rounded-lg ${
+              className={`flex items-center gap-2 py-2 rounded-lg mt-14 ${
                 Theme == "Dark" ? "hover:bg-slate-400 " : "hover:bg-slate-200"
               }`}
             >
               {" "}
               <MdOutlineDashboard />
               Dashboard
-            </p>
+            </p>}
 
-            {data &&
+            {showMenu && data &&
               data.map((item, index) => {
                 return (
                   <div className={` `} key={index}>
@@ -118,6 +136,7 @@ const HomePage = () => {
                 );
               })}
           </div>
+          
         </div>
 
         <div
