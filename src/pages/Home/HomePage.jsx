@@ -55,7 +55,7 @@ const [showMenu,setShowMenu] = useState(false)
         }`}
       >
       
-        <p className={`absolute p-2 m-3  ${showMenu ? "left-[15vw]" : ""}  bg-slate-500 rounded-xl `} onClick={()=>setShowMenu((prev)=>!prev)}><IoMdMenu size={30}/></p>
+        <p className={`absolute p-2 m-3   bg-slate-500 rounded-xl `} onClick={()=>setShowMenu((prev)=>!prev)}><IoMdMenu size={30}/></p>
         <style>
         {`
           .my-component::-webkit-scrollbar {
