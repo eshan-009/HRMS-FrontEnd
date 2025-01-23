@@ -106,7 +106,7 @@ const EmployeeList = () => {
         </select>
       </div>
 
-      <div className="border rounded-lg overflow-hidden mt-9 mb-7">
+      <div className="border rounded-lg overflow-x-auto mt-9 mb-7">
         <table className="w-full">
           <thead className="w-full text-left ">
             <tr
@@ -114,12 +114,12 @@ const EmployeeList = () => {
                 Theme == "Dark" ? "bg-slate-600 text-white" : "bg-slate-400"
               }`}
             >
-              <th className="p-3">Avatar</th>
-              <th>Employee Name</th>
-              <th>Employee Email</th>
-              <th>Employee Code</th>
-              <th>Department</th>
-              <th>Action</th>
+              <th className="p-3 min-w-[120px]">Avatar</th>
+              <th className="min-w-[150px] text-center">Employee Name</th>
+              <th className="min-w-[150px] text-center">Employee Email</th>
+              <th className="min-w-[150px] text-center">Employee Code</th>
+              <th className="min-w-[150px] text-center">Department</th>
+              <th className="min-w-[80px] text-center">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -127,7 +127,7 @@ const EmployeeList = () => {
               data.length > 0 &&
               data.map((item, index) => (
                 <tr
-                  className={`h-full ${
+                  className={`h-full  ${
                     index % 2 == 0
                       ? Theme == "Dark"
                         ? "bg-zinc-500"

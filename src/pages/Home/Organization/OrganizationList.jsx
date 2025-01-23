@@ -41,7 +41,7 @@ const OrganizationList = () => {
         buttonText={"Add Sub Organization"}
       />
 
-      <div className="border rounded-lg overflow-hidden mt-10 mb-7">
+      <div className="border rounded-lg overflow-x-auto mt-10 mb-7">
         <table className="w-full">
           <thead className="w-full text-left ">
             <tr
@@ -49,18 +49,18 @@ const OrganizationList = () => {
                 Theme == "Dark" ? "bg-slate-600 text-white" : "bg-slate-400"
               }`}
             >
-              <th className="p-3">S No.</th>
-              <th>Organization Logo</th>
-              <th>Organization Name</th>
-              <th>Organization Description</th>
-              <th>Action</th>
+              <th className="p-3 min-w-[80px] text-center">S No.</th>
+              <th className="min-w-[120px] text-center">Organization Logo</th>
+              <th className="min-w-[150px] text-center">Organization Name</th>
+              <th className="min-w-[150px] text-center">Organization Description</th>
+              <th className="min-w-[60px] text-center">Action</th>
             </tr>
           </thead>
           <tbody>
             {data &&
               data.map((item, index) => (
                 <tr
-                  className={`h-full ${
+                  className={`h-full text-center ${
                     index % 2 == 0
                       ? Theme == "Dark"
                         ? "bg-zinc-500 text-white"
@@ -69,16 +69,16 @@ const OrganizationList = () => {
                   }`}
                 >
                   <td className="p-5">{index + 1}</td>
-                  <td>
+                  <td >
                     <img
-                      className="w-[40px] h-[40px] object-cover border border-black rounded-full"
+                      className="w-[40px] h-[40px] mx-auto object-cover border border-black rounded-full"
                       src={item.logo}
                     ></img>
                   </td>
                   <td>{item.name}</td>
                   <td>{item.description.substring(0, 20)}...</td>
                   <td>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center gap-3">
                       <FiEdit
                         className="text-blue-500 "
                         onClick={() => editHandler(item)}

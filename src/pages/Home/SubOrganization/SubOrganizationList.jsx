@@ -101,7 +101,7 @@ const SubOrganizationList = () => {
         </select>
       </div>
 
-      <div className={`border rounded-lg overflow-hidden mt-9 mb-7 `}>
+      <div className={`border rounded-lg overflow-x-auto mt-9 mb-7 `}>
         <table className="w-full">
           <thead className="w-full text-left ">
             <tr
@@ -109,10 +109,10 @@ const SubOrganizationList = () => {
                 Theme == "Dark" ? "bg-slate-700 text-white" : "bg-slate-400"
               }`}
             >
-              <th className="p-3">Sub Organization Id</th>
-              <th>Sub Organization Name</th>
-              <th>Assign Organization</th>
-              <th>Action</th>
+              <th className="p-3 min-w-[150px] text-center">Sub Organization Id</th>
+              <th className="min-w-[150px] text-center">Sub Organization Name</th>
+              <th className="min-w-[150px] text-center">Assign Organization</th>
+              <th className="min-w-[80px] text-center">Action</th>
             </tr>
           </thead>
           <tbody>

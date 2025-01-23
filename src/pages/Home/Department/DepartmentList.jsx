@@ -124,7 +124,7 @@ const DepartmentList = () => {
         </select>
       </div>
 
-      <div className="border rounded-lg overflow-hidden mt-9 mb-7">
+      <div className="border rounded-lg overflow-x-auto  mt-9 mb-7">
         <table className="w-full">
           <thead className="w-full text-left ">
             <tr
@@ -132,19 +132,19 @@ const DepartmentList = () => {
                 Theme == "Dark" ? "bg-slate-600 text-white" : "bg-slate-400"
               }`}
             >
-              <th className="p-3">Department Name</th>
-              <th>Department Manager</th>
-              <th>Department Description</th>
-              <th>Organization</th>
-              <th>Sub Organization</th>
-              <th>Action</th>
+              <th className="p-3 min-w-[150px] text-center">Department Name</th>
+              <th className="min-w-[150px] text-center">Department Manager</th>
+              <th className="min-w-[150px] text-center">Department Description</th>
+              <th className="min-w-[150px] text-center">Organization</th>
+              <th className="min-w-[150px] text-center">Sub Organization</th>
+              <th className="min-w-[60px] text-center">Action</th>
             </tr>
           </thead>
           <tbody>
             {data &&
               data.map((item, index) => (
                 <tr
-                  className={`h-full ${
+                  className={`h-full text-center ${
                     index % 2 == 0
                       ? Theme == "Dark"
                         ? "bg-zinc-500 text-white"
@@ -160,7 +160,7 @@ const DepartmentList = () => {
                       item?.manager?.personalDetails?.lastName}
                   </td>
                   <td>{item.description}</td>
-                  <td>
+                  <td >
                     {item.Organization ? (
                       <AssignmentButton
                         onClick={() =>
@@ -196,7 +196,7 @@ const DepartmentList = () => {
           deleteHandler={()=>deleteHandler(item._id,navigate)}
           /> */}
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 justify-center">
                       <FiEdit
                         className="text-blue-500 "
                         onClick={() => editHandler(item)}
