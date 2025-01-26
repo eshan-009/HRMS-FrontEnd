@@ -32,7 +32,7 @@ const submissionHandler = (email,password,organization,roleId)=>{
 }
 
   return (
-    <div className='  w-1/2 '>
+    <div className=' '>
       <form 
       className=' w-96  mx-auto'
       onSubmit={handleSubmit((data) =>submissionHandler(data.email,data.password,data.organizationId,data.roleId) )}>

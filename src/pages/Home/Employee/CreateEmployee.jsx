@@ -38,7 +38,7 @@ const CreateEmployee = () => {
   return (
     <>
       <div
-        className={`flex flex-col gap-10 items-center rounded-lg mt-10 ${
+        className={`flex flex-col gap-10 items-center rounded-lg mt-10 min-w-96 ${
           Theme == "Dark" ? "bg-slate-800 text-white" : "bg-slate-100"
         }`}
       >
