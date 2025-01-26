@@ -19,6 +19,7 @@ import ConfigureShift from './pages/Home/Attendence/ConfigureShift'
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { setTheme } from './redux/slices/themeSlice'
+import HeroSection from './pages/Home/HeroSection'
 
 
 function App() {
@@ -34,6 +35,7 @@ dispatch(setTheme("Dark"))
     <Route path='/login' element={<LoginPage/>}></Route>
     <Route path='/' element={<LoginPage/>}></Route>
     <Route path="/home" element={<HomePage/>}>
+    <Route path="/home/" element={<HeroSection/>}></Route>
     
     <Route path='/home/Create-Organization' element={<CreateOrganization/>}></Route>
     <Route path='/home/Organization-List' element={<OrganizationList/>}></Route>

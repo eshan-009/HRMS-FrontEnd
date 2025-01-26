@@ -18,6 +18,7 @@ const HomePage = () => {
 const [showMenu,setShowMenu] = useState(false)
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+    const user = useSelector((state)=>state.User)
   // const fetchTabs = async()=>{
   //   // const asideTabs = await dispatch(getAsideTabs(navigate))
   //   // setData(asideTabs)
@@ -43,7 +44,6 @@ const [showMenu,setShowMenu] = useState(false)
       return { ...prev, [label]: !prev[label] };
     });
   }
-
 
 
   return (
@@ -73,7 +73,10 @@ const [showMenu,setShowMenu] = useState(false)
    {/* <p onClick={()=>setShowMenu((prev)=>!prev)}><IoMdMenu/></p> */}
  
    {   showMenu &&   <p
-              onClick={() => dispatch(getUserById())}
+              onClick={() => {
+                dispatch(getUserById())
+                navigate("/home/")
+              }}
               className={`flex items-center gap-2 py-2 rounded-lg mt-14 ${
                 Theme == "Dark" ? "hover:bg-slate-400 " : "hover:bg-slate-200"
               }`}
@@ -146,6 +149,7 @@ const [showMenu,setShowMenu] = useState(false)
             Theme == "Dark" ? "bg-slate-600 text-white" : "bg-slate-300"
           } `}
         >
+   
           <Outlet />
         </div>
       </div>

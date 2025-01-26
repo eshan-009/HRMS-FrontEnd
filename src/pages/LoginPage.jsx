@@ -31,7 +31,7 @@ const LoginPage = () => {
        <h3 className='font-serif font-bold text-2xl'> Sign-In Portal</h3>
         </div>
        </div> */}
-     <div className='flex justify-center '>
+     <div className='flex justify-center p-4 '>
        { !isLoggedIn && <LoginForm/> }
      </div>
     </div>

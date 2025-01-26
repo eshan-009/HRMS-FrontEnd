@@ -253,7 +253,7 @@ const CreateForm = ({
  
 
   return (
-    <div className={` mt-14 flex justify-center m-4 rounded-lg p-7 flex-col gap-6 items-center min-w-96 ${Theme=="Dark" ? "bg-slate-800" : "bg-slate-100"}`}>
+    <div className={` mt-14 flex justify-center  rounded-lg p-7 flex-col gap-6 items-center  min-w-96 ${Theme=="Dark" ? "bg-slate-800" : "bg-slate-100"}`}>
       {
        parent!=="Employee" && <Headings title={location.pathname.split("/").at(-1).replaceAll("-", " ")}/>
       }
@@ -326,7 +326,7 @@ const CreateForm = ({
                     >
                       Select
                     </label>
-                    <button
+                    {/* <button
                       onClick={(e) => {
                         e.preventDefault();
                      
@@ -334,7 +334,7 @@ const CreateForm = ({
                       className="cursor-pointer bg-yellow-400 text-black px-4 py-2 rounded mt-2"
                     >
                       Upload
-                    </button>
+                    </button> */}
                   </div>
                   <input
                     type="file"
